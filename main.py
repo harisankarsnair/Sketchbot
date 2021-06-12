@@ -13,6 +13,7 @@ if uploaded_file is not None :
     st.image(img,caption="Uploaded Image",use_column_width=None)
 
 if st.button("Sketch Image"):
+    @st.cache
     img1 = cv2.imread('input.jpg')  # reading the image file
 
     gray_image = cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)  # converting the image to gray scale
