@@ -7,12 +7,13 @@ st.title("Image to Pencil Sketch App :camera:")
 uploaded_file = st.file_uploader("Choose an image for conversion")
 if uploaded_file is not None :
     img = Image.open(uploaded_file)
-    image = np.array(img)
-    input = cv2.imwrite('input.jpg',image)
+    #image = np.array(img)
+    #input = cv2.imwrite('input.jpg',image)
+    img.save('input.jpg')
     st.image(img,caption="Uploaded Image",use_column_width=None)
 
 if st.button("Sketch Image"):
-    img1 = cv2.imread(input)  # reading the image file
+    img1 = cv2.imread('input.jpg')  # reading the image file
 
     gray_image = cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)  # converting the image to gray scale
 
