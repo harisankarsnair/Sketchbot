@@ -14,7 +14,7 @@ if uploaded_file is not None :
 if st.button("Sketch Image"):
     img1 = cv2.imread(input)  # reading the image file
 
-    gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)  # converting the image to gray scale
+    gray_image = cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)  # converting the image to gray scale
 
     inverted_gray_image = 255 - gray_image  # converting the gray scale to inverted gray scale/negative value of gray scale
 
