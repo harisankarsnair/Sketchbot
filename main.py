@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 
-st.title("Image to Pencil Sketch App :camera:")
+st.title("Image to Pencil Sketch App :camera: ")
 uploaded_file = st.file_uploader("Choose an image for conversion")
 if uploaded_file is not None :
     img = Image.open(uploaded_file)
