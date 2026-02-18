@@ -4,8 +4,8 @@ import numpy as np
 from PIL import Image
 
 # 1. Update the title and layout
-st.title("Sketchbot")
-st.subheader("Convert your photos into pencil sketches")
+st.title(" 🎨 Sketchbot")
+st.subheader("Transform pixels into pencil strokes")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
