@@ -1,6 +1,7 @@
 streamlit>=0.82.0
-opencv-python-headless
+opencv-python-headless==4.8.0.74
 Pillow==8.2.0
-numpy
+numpy<2.0.0
+legacy-cgi
 
 
