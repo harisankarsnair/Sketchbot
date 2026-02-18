@@ -56,4 +56,4 @@ streamlit run main.py
 5. Open a Pull Request.
 
 ---
-Created with ❤️ by [Harisankar S Nair](https://github.com/harisankarsnair)
+
