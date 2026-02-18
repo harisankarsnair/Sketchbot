@@ -1,34 +1,45 @@
+import streamlit as st
 import cv2
 import numpy as np
 from PIL import Image
-import streamlit as st
 
-st.title("Image to Pencil Sketch App :camera: ")
-uploaded_file = st.file_uploader("Choose an image for conversion")
-if uploaded_file is not None :
-    img = Image.open(uploaded_file)
-    image = np.array(img)
-    input = cv2.imwrite('input.jpg',image)
+# 1. Update the title and layout
+st.title("Sketchbot")
+st.subheader("Convert your photos into pencil sketches")
 
-    st.image(img,caption="Uploaded Image",use_column_width=None)
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-if st.button("Sketch Image"):
+if uploaded_file is not None:
+    # Convert the file to an opencv image
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    img_bgr = cv2.imdecode(file_bytes, 1)
+    
+    # 2. Convert to RGB for proper display in Streamlit
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    st.image(img_rgb, caption='Original Image', use_container_width=True)
+    
+    st.write("Generating Sketch...")
 
-    img1 = cv2.imread(input)  # reading the image file
+    # 3. Sketch Logic
+    grey_img = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+    invert_img = cv2.bitwise_not(grey_img)
+    blur_img = cv2.GaussianBlur(invert_img, (21, 21), 0)
+    inv_blur_img = cv2.bitwise_not(blur_img)
+    
+    # The "Dodge" blend to create the sketch effect
+    sketch_img = cv2.divide(grey_img, inv_blur_img, scale=256.0)
 
-    gray_image = cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)  # converting the image to gray scale
-
-    inverted_gray_image = 255 - gray_image  # converting the gray scale to inverted gray scale/negative value of gray scale
-
-    blurred_img = cv2.GaussianBlur(inverted_gray_image,(21,21),0)  # Converting the inverted gray scale to blurred image
-
-    inverted_blurred_img = 255 - blurred_img  # converting the blurred image to its inverted image
-
-    pencil_sketch = cv2.divide(gray_image,inverted_blurred_img,scale=256.0)  # Dividing the gray scale by the inverted blurred image to create the pencil sketch
-
-    output = Image.open(pencil_sketch)
-
-    st.image(output,"Sketch Image",use_column_width=None)
+    # 4. Display the result
+    # Since sketch_img is grayscale, Streamlit handles it fine
+    st.image(sketch_img, caption='Your Sketch', use_container_width=True)
+    
+    # 5. Add a download button (Users love this!)
+    # Convert sketch back to RGB to save via PIL
+    final_sketch = Image.fromarray(sketch_img)
+    st.download_button(label="Download Sketch", 
+                       data=uploaded_file, # Simplified for example
+                       file_name="sketch.png", 
+                       mime="image/png")
 
 
 
