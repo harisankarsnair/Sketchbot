@@ -2,7 +2,7 @@
 
 ### *Transforming Pixels into Pencil Strokes*
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg)](https://sketchbot.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/harisankarsnair/Sketchbot/main/main.py)
 [![Python Version](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
